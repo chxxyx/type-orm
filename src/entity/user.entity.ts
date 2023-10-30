@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, Generated, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Generated, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn } from "typeorm";
+import { ProfileModel } from "./profile.entity";
 
 export enum Role {
     USER = 'user',
@@ -25,13 +26,13 @@ export class UserModel {
         //     unique: false, // 컬럼 중에서 유일무이한 값이 돼야 하는지에 대한 여부, ex) 무조건 하나의 로우 값이 다른 로우와의 값과 같은 값이면 X 
         // }
     ) // 실제 테이블의 컬럼과 아래 값을 매핑한다. -- 원래 원칙적으로는 다 입력을 해줘야 하지만, 타입 예상
-    title: string; 
+    email: string; 
 
     @Column({
         type: 'enum',
         enum: Role,
         default: Role.USER,
-        
+
     })
     role: Role;
 
@@ -54,4 +55,7 @@ export class UserModel {
     @Generated('uuid')
     additionalId: string;
 
-}
+    @OneToOne(() => ProfileModel, (profile) => profile.user)
+    profile: ProfileModel;
+
+}   

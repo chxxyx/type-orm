@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BookModel, CarModel } from './entity/inheritance.entity';
+import { AirplaneModel, BookModel, CarModel, SingleBaseModel } from './entity/inheritance.entity';
 import { StudentModel, TeacherModel } from './entity/person.entity';
+import { ProfileModel } from './entity/profile.entity';
 import { UserModel } from './entity/user.entity';
 
 @Module({
@@ -13,6 +14,7 @@ import { UserModel } from './entity/user.entity';
         UserModel,
         StudentModel,
         TeacherModel,
+        ProfileModel
     ])
     ,
     TypeOrmModule.forRoot({
@@ -22,7 +24,15 @@ import { UserModel } from './entity/user.entity';
       username: 'postgres',
       password: 'postgres',
       database: 'typeormstudy',
-      entities: [UserModel, StudentModel, TeacherModel, CarModel, BookModel],
+      entities: [
+        UserModel, 
+        StudentModel, 
+        TeacherModel, 
+        CarModel, 
+        BookModel, 
+        AirplaneModel, 
+        SingleBaseModel,
+        ProfileModel],
       synchronize: true,
     })
   ],
