@@ -1,3 +1,4 @@
+import { TagModel } from './entity/tag.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -17,6 +18,7 @@ import { UserModel } from './entity/user.entity';
         TeacherModel,
         ProfileModel,
         PostModel,
+        TagModel,
     ])
     ,
     TypeOrmModule.forRoot({
@@ -36,6 +38,7 @@ import { UserModel } from './entity/user.entity';
         SingleBaseModel,
         ProfileModel,
         PostModel,
+        TagModel,
       ],
       synchronize: true,
     })
