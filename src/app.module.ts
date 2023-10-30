@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AirplaneModel, BookModel, CarModel, SingleBaseModel } from './entity/inheritance.entity';
 import { StudentModel, TeacherModel } from './entity/person.entity';
+import { PostModel } from './entity/post.entity';
 import { ProfileModel } from './entity/profile.entity';
 import { UserModel } from './entity/user.entity';
 
@@ -14,7 +15,8 @@ import { UserModel } from './entity/user.entity';
         UserModel,
         StudentModel,
         TeacherModel,
-        ProfileModel
+        ProfileModel,
+        PostModel,
     ])
     ,
     TypeOrmModule.forRoot({
@@ -32,7 +34,9 @@ import { UserModel } from './entity/user.entity';
         BookModel, 
         AirplaneModel, 
         SingleBaseModel,
-        ProfileModel],
+        ProfileModel,
+        PostModel,
+      ],
       synchronize: true,
     })
   ],

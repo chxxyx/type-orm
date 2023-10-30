@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { throwIfEmpty } from 'rxjs';
 import { Repository } from 'typeorm';
 import { AppService } from './app.service';
+import { PostModel } from './entity/post.entity';
 import { ProfileModel } from './entity/profile.entity';
 import { UserModel, Role } from './entity/user.entity';
 
@@ -13,6 +14,8 @@ export class AppController {
     private readonly userRepository: Repository<UserModel>,
     @InjectRepository(ProfileModel)
     private readonly profileRepository: Repository<ProfileModel>,
+    @InjectRepository(PostModel)
+    private readonly postRepository: Repository<PostModel>,
 
   ) {}
 
@@ -33,6 +36,7 @@ export class AppController {
       // }
       relations: {
         profile: true, // profile 정보도 다 가져옴
+        posts: true
       }
     });
   }
@@ -68,4 +72,24 @@ export class AppController {
 
     return user;
   }
+
+  @Post('user/post')
+  async createUserAndPosts() {
+    const user = await this.userRepository.save({
+      email: 'postUser@codefactory.ai',
+    })
+
+    await this.postRepository.save({
+      title: 'post1',
+      author: user
+    });
+
+    await this.postRepository.save({
+      title: 'post 2',
+      author: user
+    })
+
+    return user;
+  }
+
 }
